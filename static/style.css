@@ -1,0 +1,208 @@
+:root {
+  --primary: #6a0dad;     /* Fiolet - główny */
+  --secondary: #8e44ad;   /* Fiolet - akcent */
+  --accent: #b19cd9;      /* Jaśniejszy fiolet */
+  --background: #f5f5f5;   /* Jasny szary */
+  --text: #333333;        /* Ciemny szary */
+  --hover-btn: #d500f9;    /* Magenta */
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(120deg, var(--background) 0%, #e2e8f0 100%);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background-color 0.3s ease;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: calc(100vh - 40px); /* 100% wysokości minus padding body */
+  display: flex;
+  gap: 30px;
+}
+
+.left-section {
+  flex-basis: 35%;
+  border: 2px solid var(--primary);
+  border-radius: 16px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  overflow-y: auto;
+}
+
+.right-section {
+  flex-basis: 65%;
+  border: 2px solid var(--primary);
+  border-radius: 16px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  overflow-y: auto;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.card {
+  margin-top: 30px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s forwards;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-header {
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 16px 16px 0 0;
+}
+
+.card-header h5 {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  border-radius: 8px;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: none;
+}
+
+.btn {
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary {
+  background: var(--primary);
+  border: none;
+}
+
+.btn-primary:hover {
+  background: var(--hover-btn);
+}
+
+.btn-secondary {
+  background: var(--primary);  /* Ten sam kolor co btn-primary */
+  border: none;
+}
+
+.btn-secondary:hover {
+  background: var(--hover-btn);
+}
+
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-secondary:focus,
+.btn-secondary:active,
+.btn-secondary.active {
+  background: var(--primary) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.output {
+  margin-top: 30px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #0f172a;
+    color: #f8fafc;
+  }
+
+  .left-section, .right-section {
+    background: rgba(30, 41, 59, 0.8);
+  }
+
+  .card {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .card-header {
+    background: rgba(30, 41, 59, 0.9);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .form-control {
+    background: #1e293b;
+    border-color: #334155;
+    color: #f8fafc;
+  }
+
+  .form-control:focus {
+    border-color: var(--primary);
+  }
+}
+
+.question-text {
+  color: #ffffff !important; /* Biały kolor czcionki */
+  background: var(--primary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  margin-left: 10px;
+  max-width: 60%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
