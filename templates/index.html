@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PageQuest</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="left-section">
+      <h1 class="text-center">PageQuest</h1>
+      <form method="POST">
+        <div class="form-group">
+          <label for="url">Podaj link do strony:</label>
+          <input type="text" class="form-control" id="url" name="url" placeholder="https://example.com" value="{{ request.form.get('url', '') }}">
+        </div>
+
+        <div class="form-group">
+          <label for="question">Zadaj pytanie (opcjonalnie):</label>
+          <input type="text" class="form-control" id="question" name="question" placeholder="Twoje pytanie..." value="{{ request.form.get('question', '') }}">
+        </div>
+
+        {% if not summary %}
+          <button type="submit" name="generate" class="btn btn-primary btn-block">
+            <i class="fas fa-magic mr-2"></i>Generuj podsumowanie
+          </button>
+        {% else %}
+          <button type="submit" name="ask" class="btn btn-secondary btn-block">
+            <i class="fas fa-question-circle mr-2"></i>Zadaj pytanie
+          </button>
+        {% endif %}
+      </form>
+    </div>
+
+    <div class="right-section">
+      {% if summary %}
+        <div class="card">
+          <div class="card-header">
+            <h5>Podsumowanie strony:</h5>
+          </div>
+          <div class="card-body">
+            <div class="output">
+              {{ summary }}
+            </div>
+          </div>
+        </div>
+      {% elif answer %}
+        <div class="card">
+          <div class="card-header">
+            <h5>Odpowiedź na pytanie:</h5>
+          </div>
+          <div class="card-body">
+            <div class="output">
+              {{ answer }}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
