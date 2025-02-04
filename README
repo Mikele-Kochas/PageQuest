@@ -1,0 +1,16 @@
+# PageQuest
+
+PageQuest to aplikacja do generowania podsumowań stron internetowych oraz odpowiadania na pytania dotyczące ich treści.
+
+## Działająca wersja online
+
+- [PageQuest na żywo](https://pagequest-production.up.railway.app/)
+
+## Jak uruchomić aplikację
+
+1. Sklonuj repozytorium:  
+   `git clone https://github.com/Mikele-Kochas/pagequest.git`
+2. Zainstaluj zależności:  
+   `pip install -r requirements.txt`
+3. Uruchom aplikację:  
+   `python app.py`
