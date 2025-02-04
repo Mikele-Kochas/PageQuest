@@ -20,7 +20,7 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  height: calc(100vh - 40px); /* 100% wysokości minus padding body */
+  height: calc(100vh - 40px); 
   display: flex;
   gap: 30px;
 }
@@ -115,7 +115,7 @@ h1 {
 }
 
 .btn-secondary {
-  background: var(--primary);  /* Ten sam kolor co btn-primary */
+  background: var(--primary);  
   border: none;
 }
 
@@ -196,7 +196,7 @@ h1 {
 }
 
 .question-text {
-  color: #ffffff !important; /* Biały kolor czcionki */
+  color: #ffffff !important; 
   background: var(--primary);
   padding: 4px 8px;
   border-radius: 4px;
