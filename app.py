@@ -4,11 +4,9 @@ import openai
 from bs4 import BeautifulSoup
 from flask import Flask, render_template, request, session
 
-# Inicjalizacja aplikacji Flask
 app = Flask(__name__)
-app.secret_key = os.urandom(24)  # Potrzebne do korzystania z sesji
+app.secret_key = os.urandom(24)  
 
-# Pobieranie klucza API OpenAI z zmiennych środowiskowych
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def generate_summary_with_model(text):
@@ -29,7 +27,7 @@ def generate_summary_with_model(text):
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=1000  # Zwiększamy limit tokenów, aby generować dłuższe podsumowania
+            max_tokens=1000  
         )
 
         if response and 'choices' in response and response['choices']:
@@ -55,7 +53,7 @@ def ask_questions_about_summary(summary, question):
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=500  # Ograniczamy długość odpowiedzi na pytania
+            max_tokens=500  
         )
 
         if response and 'choices' in response and response['choices']:
@@ -77,13 +75,13 @@ def get_cleaned_text_from_url(url):
 
         soup = BeautifulSoup(response.content, 'html.parser')
 
-        # Usuwamy niepotrzebne tagi
+        
         for irrelevant in soup.body(['script', 'style', 'img', 'input']):
             irrelevant.decompose()
 
         text = soup.get_text()
 
-        # Usuwamy puste linie
+        
         cleaned_text = '\n'.join([line for line in text.splitlines() if line.strip() != ''])
         return cleaned_text
 
@@ -94,10 +92,9 @@ def get_cleaned_text_from_url(url):
 @app.route("/", methods=["GET", "POST"])
 def index():
     summary = session.get("summary")
-    qa_history = session.get("qa_history", [])  # Nowa lista przechowująca historię pytań i odpowiedzi
+    qa_history = session.get("qa_history", [])  
 
     if request.method == "POST":
-        # Rozróżniamy, który przycisk został naciśnięty
         if "generate" in request.form:
             url = request.form.get("url", "").strip()
             if url:
@@ -105,7 +102,6 @@ def index():
                 if page_text:
                     summary = generate_summary_with_model(page_text)
                     session["summary"] = summary
-                    # Resetuj historię pytań i odpowiedzi przy nowym podsumowaniu
                     session["qa_history"] = []
                 else:
                     summary = "Nie udało się pobrać lub przetworzyć treści strony."
@@ -122,7 +118,6 @@ def index():
             elif question:
                 answer = ask_questions_about_summary(summary, question)
                 if answer:
-                    # Dodajemy nowe pytanie i odpowiedź do historii
                     qa_history.insert(0, {"question": question, "answer": answer})
                     session["qa_history"] = qa_history
 
